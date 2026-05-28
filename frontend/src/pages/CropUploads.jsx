@@ -16,12 +16,8 @@ function CropUploads() {
   };
 
   useEffect(() => {
-    const run = async () => {
-      await fetchCropUploads();
-    };
-    run();
+    fetchCropUploads();
   }, []);
-
 
   const markSold = async (id) => {
     try {
@@ -92,7 +88,7 @@ function CropUploads() {
                   cropUploads.map((crop) => (
                     <tr key={crop.id}>
                       <td>{crop.farmer_name}</td>
-                      <td>{crop.crop_type}</td>
+                      <td>{crop.crop_name || crop.crop_type}</td>
                       <td>{crop.village}</td>
                       <td>₹{crop.price}</td>
                       <td>
