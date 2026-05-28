@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import API from "../api/axios";
 
 function FarmerSignup() {
-
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -13,6 +12,8 @@ function FarmerSignup() {
     password: "",
   });
 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -21,41 +22,40 @@ function FarmerSignup() {
   };
 
   const signup = async (e) => {
-
     e.preventDefault();
+    setLoading(true);
 
     try {
-
-      await API.post("/farmer/signup/", {
+      const response = await API.post("/farmer/signup/", {
         name: form.name.trim(),
         mobile: form.mobile.trim(),
         email: form.email.trim().toLowerCase(),
         password: form.password.trim(),
       });
 
+      console.log("Signup response:", response.data);
+
       alert("Signup Successful");
-
       navigate("/farmer-login");
-
     } catch (error) {
+      console.log("Full error:", error);
+      console.log("Backend error:", error.response?.data);
+      console.log("Status:", error.response?.status);
 
-      alert(
-        error.response?.data?.message ||
-        "Signup failed.Enter valid credentials ."
-      );
+      alert(JSON.stringify(error.response?.data));
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="signup-page">
-
       <div className="form-box">
         <h1>Farmer Signup</h1>
         <p>Create your account</p>
+
         <form onSubmit={signup}>
-
           <label>Full Name</label>
-
           <input
             type="text"
             name="name"
@@ -66,7 +66,6 @@ function FarmerSignup() {
           />
 
           <label>Mobile Number</label>
-
           <input
             type="text"
             name="mobile"
@@ -77,7 +76,6 @@ function FarmerSignup() {
           />
 
           <label>Email Address</label>
-
           <input
             type="email"
             name="email"
@@ -88,7 +86,6 @@ function FarmerSignup() {
           />
 
           <label>Password</label>
-
           <input
             type="password"
             name="password"
@@ -98,20 +95,14 @@ function FarmerSignup() {
             required
           />
 
-          <button type="submit">
-            Create Account
+          <button type="submit" disabled={loading}>
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
-
         </form>
 
         <p>
-          Already have account?
-          {" "}
-          <Link to="/farmer-login">
-            Login
-          </Link>
+          Already have account? <Link to="/farmer-login">Login</Link>
         </p>
-
       </div>
     </div>
   );
