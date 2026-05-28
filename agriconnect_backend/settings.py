@@ -9,7 +9,10 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
+import os
+import pymysql
 
+pymysql.install_as_MySQLdb()
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,8 +34,8 @@ ALLOWED_HOSTS = [
     '[::1]',
     '0.0.0.0',
     'testserver',
+    '.onrender.com',
 ]
-
 
 
 
@@ -89,11 +92,11 @@ WSGI_APPLICATION = 'agriconnect_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'agriconnect_db',
-        'USER': 'root',
-        'PASSWORD': '123!@#abc',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': os.getenv("MYSQLDATABASE"),
+        'USER': os.getenv("MYSQLUSER"),
+        'PASSWORD': os.getenv("MYSQLPASSWORD"),
+        'HOST': os.getenv("MYSQLHOST"),
+        'PORT': os.getenv("MYSQLPORT"),
     }
 }
 
