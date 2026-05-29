@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://agriconnect-0u68.onrender.com/api",
+  baseURL: "https://agriconnect-1-l9s0.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
