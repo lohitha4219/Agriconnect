@@ -49,9 +49,9 @@ function Farmers() {
   };
 
   const logout = () => {
-  localStorage.removeItem("farmer");
-  navigate("/");
-};
+    localStorage.removeItem("farmer");
+    navigate("/", { replace: true });
+  };
 
   const getCropCount = (farmer) => {
     return crops.filter((crop) => crop.email === farmer.email).length;

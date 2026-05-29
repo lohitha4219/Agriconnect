@@ -24,7 +24,7 @@ function FarmerSchemes() {
 
   const logout = () => {
     localStorage.removeItem("farmer");
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   return (

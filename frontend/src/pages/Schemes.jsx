@@ -28,7 +28,7 @@ function Schemes() {
 
   const logout = () => {
     localStorage.removeItem("admin");
-    navigate("/admin-login");
+    navigate("/", { replace: true });
   };
 
   const openAddForm = () => {

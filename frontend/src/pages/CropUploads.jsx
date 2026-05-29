@@ -32,7 +32,7 @@ function CropUploads() {
 
   const logout = () => {
     localStorage.removeItem("admin");
-    navigate("/admin-login");
+    navigate("/", { replace: true });
   };
 
   return (

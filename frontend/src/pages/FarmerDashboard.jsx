@@ -30,7 +30,7 @@ function FarmerDashboard() {
 
   const logout = () => {
     localStorage.removeItem("farmer");
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   const soldCrops = myCrops.filter((crop) => crop.status === "Sold").length;

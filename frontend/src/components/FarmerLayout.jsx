@@ -1,18 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 
-// NOTE: This file was introduced during a UI refactor.
-// It is intentionally left as a lightweight wrapper to avoid breaking routing.
-// If you want to fully revert the refactor, remove imports/usages from farmer pages
-// and delete this component.
-
 function FarmerLayout({ children, activePath }) {
   const navigate = useNavigate();
   const farmer = JSON.parse(localStorage.getItem("farmer"));
 
   const logout = () => {
     localStorage.removeItem("farmer");
-    alert("Farmer logged out successfully");
-    navigate("/farmer-login");
+    navigate("/", { replace: true });
   };
 
   const avatarLetter = farmer?.name
@@ -37,7 +31,10 @@ function FarmerLayout({ children, activePath }) {
             <strong>{userName}</strong>
             <p>Farmer Account</p>
           </div>
-          <button className="farmer-logout-btn farmer-header-action" onClick={logout}>
+          <button
+            className="farmer-logout-btn farmer-header-action"
+            onClick={logout}
+          >
             Logout
           </button>
         </div>

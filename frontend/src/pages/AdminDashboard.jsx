@@ -5,7 +5,7 @@ function AdminDashboard() {
 
  const logout = () => {
   localStorage.removeItem("admin");
-  navigate("/");
+  navigate("/", { replace: true });
 };
   return (
     <div className="admin-panel">

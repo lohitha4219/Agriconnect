@@ -17,6 +17,9 @@ import CropUpload from "./pages/CropUpload";
 import FarmerSchemes from "./pages/FarmerSchemes";
 import Weather from "./pages/Weather";
 import DiseaseDetection from "./pages/DiseaseDetection";
+
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
     <BrowserRouter>
@@ -24,23 +27,114 @@ function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/admin-login" element={<AdminLogin />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/farmers" element={<Farmers />} />
-        <Route path="/crop-uploads" element={<CropUploads />} />
-        <Route path="/market-prices" element={<MarketPrices />} />
-        <Route path="/schemes" element={<Schemes />} />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <>
+              <ProtectedRoute authKey="admin" fallbackPath="/admin-login" />
+              <AdminDashboard />
+            </>
+          }
+        />
+        <Route
+          path="/farmers"
+          element={
+            <>
+              <ProtectedRoute authKey="admin" fallbackPath="/admin-login" />
+              <Farmers />
+            </>
+          }
+        />
+        <Route
+          path="/crop-uploads"
+          element={
+            <>
+              <ProtectedRoute authKey="admin" fallbackPath="/admin-login" />
+              <CropUploads />
+            </>
+          }
+        />
+        <Route
+          path="/market-prices"
+          element={
+            <>
+              <ProtectedRoute authKey="admin" fallbackPath="/admin-login" />
+              <MarketPrices />
+            </>
+          }
+        />
+        <Route
+          path="/schemes"
+          element={
+            <>
+              <ProtectedRoute authKey="admin" fallbackPath="/admin-login" />
+              <Schemes />
+            </>
+          }
+        />
+
         <Route path="/farmer-signup" element={<FarmerSignup />} />
         <Route path="/farmer-login" element={<FarmerLogin />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/farmer-dashboard" element={<FarmerDashboard />} />
-        <Route path="/farmer-market-prices" element={<FarmerMarketPrices />} />
-        <Route path="/upload-crop" element={<CropUpload />} />
-        <Route path="/farmer-schemes" element={<FarmerSchemes />} />
-        <Route path="/weather" element={<Weather />} />
-        <Route path="/disease-detection" element={<DiseaseDetection />} />
+
+        <Route
+          path="/farmer-dashboard"
+          element={
+            <>
+              <ProtectedRoute authKey="farmer" fallbackPath="/farmer-login" />
+              <FarmerDashboard />
+            </>
+          }
+        />
+        <Route
+          path="/farmer-market-prices"
+          element={
+            <>
+              <ProtectedRoute authKey="farmer" fallbackPath="/farmer-login" />
+              <FarmerMarketPrices />
+            </>
+          }
+        />
+        <Route
+          path="/upload-crop"
+          element={
+            <>
+              <ProtectedRoute authKey="farmer" fallbackPath="/farmer-login" />
+              <CropUpload />
+            </>
+          }
+        />
+        <Route
+          path="/farmer-schemes"
+          element={
+            <>
+              <ProtectedRoute authKey="farmer" fallbackPath="/farmer-login" />
+              <FarmerSchemes />
+            </>
+          }
+        />
+        <Route
+          path="/weather"
+          element={
+            <>
+              <ProtectedRoute authKey="farmer" fallbackPath="/farmer-login" />
+              <Weather />
+            </>
+          }
+        />
+        <Route
+          path="/disease-detection"
+          element={
+            <>
+              <ProtectedRoute authKey="farmer" fallbackPath="/farmer-login" />
+              <DiseaseDetection />
+            </>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
